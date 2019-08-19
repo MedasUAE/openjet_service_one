@@ -53,5 +53,5 @@ const cors = corsMiddleware({
 
 server.listen(config.port,()=>{    
     require('./routes')(server);
-    console.log(" qqs Server started on port: ", config.port);
+    console.log(" openjet Server started on port: ", config.port);
 });

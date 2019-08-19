@@ -1,7 +1,7 @@
 {
-  "name": "qqs-ws",
+  "name": "openjet-ws",
   "version": "1.0.0",
-  "description": "rest webservice for queue",
+  "description": "rest webservice for openjet",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
