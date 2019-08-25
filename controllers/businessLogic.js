@@ -104,65 +104,66 @@ function validateMedicines(medicineList) {
   } else {
 
     medicineList.map(function (medicine) {
+      let medicine_new = {}; 
 
-      if (medicine.medicine_id) medicine.medicine_id = medicine.medicine_id;
+      if (medicine.medicine_id) medicine_new.medicine_id = medicine.medicine_id;
       else {
         returnObj.valid = false;
         returnObj.message = "medicine_id required";
         return returnObj;
       }
-
-      if (medicine.medicine_dosage_unit) medicine.medicine_dosage_unit = medicine.medicine_dosage_unit;
-      else {
-        returnObj.valid = false;
-        returnObj.message = "medicine_dosage_unit required";
-        return returnObj;
-      }
-      if (medicine.medicine_dosage_value) medicine.medicine_dosage_value = parseInt(medicine.medicine_dosage_value);
-      else {
-        returnObj.valid = false;
-        returnObj.message = "medicine_dosage_value required";
-        return returnObj;
-      }
-      if (medicine.medicine_roa) medicine.medicine_roa = medicine.medicine_roa;
+      // commit  medicine_dosage_unit and medicine_dosage_value
+      // if (medicine.medicine_dosage_unit) medicine.medicine_dosage_unit = medicine.medicine_dosage_unit;
+      // else {
+      //   returnObj.valid = false;
+      //   returnObj.message = "medicine_dosage_unit required";
+      //   return returnObj;
+      // }
+      // if (medicine.medicine_dosage_value) medicine.medicine_dosage_value = parseInt(medicine.medicine_dosage_value);
+      // else {
+      //   returnObj.valid = false;
+      //   returnObj.message = "medicine_dosage_value required";
+      //   return returnObj;
+      // }
+      if (medicine.medicine_roa) medicine_new.medicine_roa = medicine.medicine_roa;
       else {
         returnObj.valid = false;
         returnObj.message = "medicine_roa required";
         return returnObj;
       }
-      if (medicine.medicine_qty) medicine.medicine_qty = parseInt(medicine.medicine_qty);
+      if (medicine.medicine_qty) medicine_new.medicine_qty = parseInt(medicine.medicine_qty);
       else {
         returnObj.valid = false;
         returnObj.message = "medicine_qty required";
         return returnObj;
       }
 
-      if (medicine.medicine_freq) medicine.medicine_freq = parseInt(medicine.medicine_freq);
+      if (medicine.medicine_freq) medicine_new.medicine_freq = parseInt(medicine.medicine_freq);
       else {
         returnObj.valid = false;
         returnObj.message = "medicine_freq required";
         return returnObj;
       }
 
-      if (medicine.medicine_freqtype) medicine.medicine_freqtype = medicine.medicine_freqtype;
+      if (medicine.medicine_freqtype) medicine_new.medicine_freqtype = medicine.medicine_freqtype;
       else {
         returnObj.valid = false;
         returnObj.message = "medicine_freqtype required";
         return returnObj;
       }
-      if (medicine.medicine_duration) medicine.medicine_duration = medicine.medicine_duration;
+      if (medicine.medicine_duration) medicine_new.medicine_duration = medicine.medicine_duration;
       else {
         returnObj.valid = false;
         returnObj.message = "medicine_duration required";
         return returnObj;
       }
-      if (medicine.remarks) medicine.remarks = medicine.remarks;
+      if (medicine.remarks) medicine_new.remarks = medicine.remarks;
       else {
         returnObj.valid = false;
         returnObj.message = "remarks required";
         return returnObj;
       }
-      returnObj.medicineList.push(medicine);
+      returnObj.medicineList.push(medicine_new);
     })
     return returnObj;
   }
@@ -341,8 +342,10 @@ async function validateData(medicineList, diagnosisList, consultationDetail, off
   };
 }
 function apiCall(jsonData, next) {
+  //logger.info(JSON.stringify(jsonData));
   axios.post('https://openjet.herokuapp.com/medicinerequest', jsonData)
     .then((response) => {
+     // logger.info("response.data.message:"+response.data.message);
       return next(response.data.message);
     })
     .catch((error) => {
