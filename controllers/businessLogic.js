@@ -25,14 +25,8 @@ async function fetchAndValidate(reqBody, next) {
     next(null, validData);
   } else {
     apiCall(validData, (message) => {
-      if(message.message){
-        logger.error("apiCall:", message.message);
-        next(null, message.message);
-      } else {
-        logger.info('openjet message:', message);
+        logger.info(' final message:', message);
         next(null, message);
-      }
-      
     });
   }
 }
