@@ -4,11 +4,11 @@ const axios = require('axios');
 const moment = require('moment');
 
 //logging
-const log4js = require('log4js');
-log4js.configure({
-  appenders: { businessLogic: { type: 'file', filename: './logs/businessLogic_ErrorLog.log' } },
-  categories: { default: { appenders: ['businessLogic'], level: 'debug' } }
-});
+ const log4js = require('log4js');
+// log4js.configure({
+//   appenders: { businessLogic: { type: 'file', filename: './logs/businessLogic_ErrorLog.log' } },
+//   categories: { default: { appenders: ['businessLogic'], level: 'debug' } }
+// });
 const logger = log4js.getLogger('businessLogic');
 
 
@@ -342,10 +342,10 @@ async function validateData(medicineList, diagnosisList, consultationDetail, off
   };
 }
 function apiCall(jsonData, next) {
-  //logger.info(JSON.stringify(jsonData));
+  logger.info(JSON.stringify(jsonData));
   axios.post('https://openjet.herokuapp.com/medicinerequest', jsonData)
     .then((response) => {
-     // logger.info("response.data.message:"+response.data.message);
+      logger.info("response.data.message:"+response.data.message);
       return next(response.data.message);
     })
     .catch((error) => {
